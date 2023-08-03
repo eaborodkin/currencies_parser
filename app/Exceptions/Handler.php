@@ -24,7 +24,11 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
-        });
+            if ($e instanceof RuntimeException) {
+                /** @todo change RuntimeException rendering with only message */
+                echo($e->getMessage());
+                exit();
+            }
+        })->stop();
     }
 }
